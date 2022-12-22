@@ -17,6 +17,14 @@ function App() {
   }, []);
 
   const updateGrid = (i, j) => {
+    const newValue = !grid[i][j];
+    setGrid((g) => {
+      g[i][j] = newValue;
+      return [...g];
+    });
+  };
+
+  const onDrag = (i, j) => {
     setGrid((g) => {
       g[i][j] = 1;
       return [...g];
@@ -61,8 +69,13 @@ function App() {
         {grid.map((row, i) => (
           <div className="row">
             {row.map((e, j) => (
-              <div onDragOver={() => updateGrid(i, j)}>
-                <Box isAlive={e} onDragTap={updateGrid} />
+              <div
+                onDragOver={() => onDrag(i, j)}
+                onDragStart={() => onDrag(i, j)}
+                onDragCapture={() => onDrag(i, j)}
+                onClick={() => updateGrid(i, j)}
+              >
+                <Box isAlive={e} />
               </div>
             ))}
           </div>
