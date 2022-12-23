@@ -1,8 +1,8 @@
 import React, { useState, useRef, useCallback } from "react";
 import { getMatrixOfNXM, gameOfLife } from "./logic";
 
-const MATRIX_ROW_SIZE = 45;
-const MATRIX_COLUMN_SIZE = 45;
+const MATRIX_ROW_SIZE = 20;
+const MATRIX_COLUMN_SIZE = 20;
 
 function App() {
   const [grid, setGrid] = useState(getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE));
