@@ -1,10 +1,11 @@
 import React, { useState, useRef, useCallback } from "react";
-import { createNxNMatrix, gameOfLife } from "./logic";
+import { getMatrixOfNXM, gameOfLife } from "./logic";
 
-const MATRIX_SIZE = 45;
+const MATRIX_ROW_SIZE = 20;
+const MATRIX_COLUMN_SIZE = 20;
 
 function App() {
-  const [grid, setGrid] = useState(createNxNMatrix(MATRIX_SIZE, false));
+  const [grid, setGrid] = useState(getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE));
   const [running, setRunning] = useState(false);
   const runningRef = useRef(running);
 
@@ -53,13 +54,13 @@ function App() {
           </div>
           <div>
             <button
-              onClick={() => setGrid(createNxNMatrix(MATRIX_SIZE, false))}
+              onClick={() => setGrid(getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE))}
             >
               {"Clear"}
             </button>
           </div>
           <div>
-            <button onClick={() => setGrid(createNxNMatrix(MATRIX_SIZE))}>
+            <button onClick={() => setGrid(getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE, true))}>
               {"Random"}
             </button>
           </div>
@@ -89,13 +90,13 @@ function App() {
 export default App;
 
 function Box({ isAlive }) {
-  const blue = "#80deea";
+  const black = "#000000";
   return (
     <div
       className="grid_box"
       style={{
-        backgroundColor: isAlive > 0 ? blue : "white",
-        color: isAlive > 0 ? blue : "white",
+        backgroundColor: isAlive > 0 ? black : "white",
+        color: isAlive > 0 ? black : "white",
       }}
     >
       {" "}
