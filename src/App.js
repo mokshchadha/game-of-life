@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
-import { getMatrixOfNXM, gameOfLife } from "./logic";
+import { getMatrixOfNXM, getNextStateOfTheMatrix } from "./logic";
 
 const MATRIX_ROW_SIZE = 35;
 const MATRIX_COLUMN_SIZE = 35;
@@ -15,7 +15,7 @@ function App() {
 
   const runSimulation = useCallback(() => {
     if (!runningRef.current) return;
-    setGrid((g) => gameOfLife(g));
+    setGrid((g) => getNextStateOfTheMatrix(g));
     setTimeout(runSimulation, 100);
   }, []);
 

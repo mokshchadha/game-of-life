@@ -1,9 +1,12 @@
-export function gameOfLife(board) {
+export function getNextStateOfTheMatrix(board) {
   const newBoard = getMatrixOfNXM(board.length, board[0].length);
 
   for (let i = 0; i < board.length; i++)
-    for (let j = 0; j < board[0].length; j++) 
-      newBoard[i][j] = getCellNextState(board[i][j], countOfAliveNeighbours(board, i, j));
+    for (let j = 0; j < board[0].length; j++)
+      newBoard[i][j] = getCellNextState(
+        board[i][j],
+        countOfAliveNeighbours(board, i, j)
+      );
   return newBoard;
 }
 
@@ -29,14 +32,14 @@ function countOfAliveNeighbours(board, i, j) {
 }
 
 function getNextStateOfAliveCell(countOfAliveNeighbours) {
-   return countOfAliveNeighbours === 2 || countOfAliveNeighbours === 3 ? 1 : 0;
+  return countOfAliveNeighbours === 2 || countOfAliveNeighbours === 3 ? 1 : 0;
 }
 
 function getNextStateOfDeadCell(countOfAliveNeighbours) {
   return countOfAliveNeighbours === 3 ? 1 : 0;
 }
 
-export function getMatrixOfNXM(row,column, isRandom = false) {
+export function getMatrixOfNXM(row, column, isRandom = false) {
   const mainArray = new Array(row).fill("");
   const finalArray = mainArray.map(function (e) {
     const random = isRandom ? (Math.random() > 0.7 ? 1 : 0) : 0;
