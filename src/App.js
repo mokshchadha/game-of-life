@@ -1,11 +1,13 @@
 import React, { useState, useRef, useCallback } from "react";
 import { getMatrixOfNXM, gameOfLife } from "./logic";
 
-const MATRIX_ROW_SIZE = 20;
-const MATRIX_COLUMN_SIZE = 20;
+const MATRIX_ROW_SIZE = 35;
+const MATRIX_COLUMN_SIZE = 35;
 
 function App() {
-  const [grid, setGrid] = useState(getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE));
+  const [grid, setGrid] = useState(
+    getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE)
+  );
   const [running, setRunning] = useState(false);
   const runningRef = useRef(running);
 
@@ -54,13 +56,21 @@ function App() {
           </div>
           <div>
             <button
-              onClick={() => setGrid(getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE))}
+              onClick={() =>
+                setGrid(getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE))
+              }
             >
               {"Clear"}
             </button>
           </div>
           <div>
-            <button onClick={() => setGrid(getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE, true))}>
+            <button
+              onClick={() =>
+                setGrid(
+                  getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE, true)
+                )
+              }
+            >
               {"Random"}
             </button>
           </div>
