@@ -48,11 +48,11 @@ export function getMatrixOfNXM(
   numberOfColumns,
   shouldPrefillWithRandom = false
 ) {
-  const mainArray = getArrayOfSizeN(numberOfRows);
-  const finalArray = mainArray.map((_) =>
+  const rows = getArrayOfSizeN(numberOfRows);
+  const rowsFilledWithColumns = rows.map((_) =>
     getArrayOfSizeN(numberOfColumns, shouldPrefillWithRandom)
   );
-  return finalArray;
+  return rowsFilledWithColumns;
 }
 
 function getArrayOfSizeN(N, shouldPrefillWithRandom = false) {
