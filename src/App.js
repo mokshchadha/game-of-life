@@ -1,12 +1,15 @@
 import React, { useState, useRef, useCallback } from "react";
-import { getMatrixOfNXM, getNextStateOfTheMatrix } from "./logic";
+import { getMatrixOfNXM, getNextStateOfTheMatrix, isAlive } from "./logic";
 
 const MATRIX_ROW_SIZE = 35;
 const MATRIX_COLUMN_SIZE = 35;
 
 function App() {
   const [grid, setGrid] = useState(
-    getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE)
+    getMatrixOfNXM({
+      numberOfRows: MATRIX_ROW_SIZE,
+      numberOfColumns: MATRIX_COLUMN_SIZE,
+    })
   );
   const [running, setRunning] = useState(false);
   const runningRef = useRef(running);
@@ -57,7 +60,12 @@ function App() {
           <div>
             <button
               onClick={() =>
-                setGrid(getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE))
+                setGrid(
+                  getMatrixOfNXM({
+                    numberOfRows: MATRIX_ROW_SIZE,
+                    numberOfColumns: MATRIX_COLUMN_SIZE,
+                  })
+                )
               }
             >
               {"Clear"}
@@ -67,7 +75,11 @@ function App() {
             <button
               onClick={() =>
                 setGrid(
-                  getMatrixOfNXM(MATRIX_ROW_SIZE, MATRIX_COLUMN_SIZE, true)
+                  getMatrixOfNXM({
+                    numberOfRows: MATRIX_ROW_SIZE,
+                    numberOfColumns: MATRIX_COLUMN_SIZE,
+                    shouldPrefillWithRandom: true,
+                  })
                 )
               }
             >
@@ -86,7 +98,7 @@ function App() {
                 onDragCapture={() => onDrag(i, j)}
                 onClick={() => updateGrid(i, j)}
               >
-                <Box isAlive={e} />
+                <Box currentValue={e} />
               </div>
             ))}
           </div>
@@ -99,14 +111,13 @@ function App() {
 
 export default App;
 
-function Box({ isAlive }) {
-  const black = "#000000";
+function Box({ currentValue }) {
   return (
     <div
       className="grid_box"
       style={{
-        backgroundColor: isAlive > 0 ? black : "white",
-        color: isAlive > 0 ? black : "white",
+        backgroundColor: isAlive(currentValue) > 0 ? "black" : "white",
+        color: isAlive(currentValue) > 0 ? "black" : "white",
       }}
     >
       {" "}

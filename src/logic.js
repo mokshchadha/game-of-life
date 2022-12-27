@@ -1,5 +1,9 @@
 export function getNextStateOfTheMatrix(board) {
-  const newBoard = getMatrixOfNXM(board.length, board[0].length);
+  const newBoard = getMatrixOfNXM({
+    numberOfRows: board.length,
+    numberOfColumns: board[0].length,
+    shouldPrefillWithRandom: false,
+  });
 
   for (let i = 0; i < board.length; i++)
     for (let j = 0; j < board[0].length; j++)
@@ -39,23 +43,23 @@ function getNextStateOfDeadCell(countOfAliveNeighbours) {
   return countOfAliveNeighbours === 3 ? 1 : 0;
 }
 
-function isAlive(currentValueOfCell) {
+export function isAlive(currentValueOfCell) {
   return currentValueOfCell === 1;
 }
 
-export function getMatrixOfNXM(
+export function getMatrixOfNXM({
   numberOfRows,
   numberOfColumns,
-  shouldPrefillWithRandom = false
-) {
-  const rows = getArrayOfSizeN(numberOfRows);
+  shouldPrefillWithRandom = false,
+}) {
+  const rows = getArrayOfSizeN({ N: numberOfRows });
   const rowsFilledWithColumns = rows.map((_) =>
-    getArrayOfSizeN(numberOfColumns, shouldPrefillWithRandom)
+    getArrayOfSizeN({ N: numberOfColumns, shouldPrefillWithRandom })
   );
   return rowsFilledWithColumns;
 }
 
-function getArrayOfSizeN(N, shouldPrefillWithRandom = false) {
+function getArrayOfSizeN({ N, shouldPrefillWithRandom = false }) {
   return new Array(N)
     .fill("")
     .map((_) =>
